@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>promise test</title>
+  <title>hash-tabs</title>
   <style>
       * { margin:0; padding:0} 
       body { font-size:100%; font-family:verdana, sans-seif}
@@ -19,37 +19,40 @@
 <body data-id="haha">
  <div class="tab-module">
    <div class="tab-hd">
-     <span><a href="#chrome"  data-hash-tab>Chrome browser</a></span>
-     <span><a href="#firefox" data-hash-tab>Firefox browser</a></span>
-     <span><a href="#safari" class="active" data-hash-tab>Safari browser</a></span>
+     <span><a href="#chrome" data-hash-tab>Chrome browser</a></span>
      <span><a href="#opera"  data-hash-tab>Opera browser</a></span>
+     <span><a href="#firefox" data-hash-tab>Firefox browser</a></span>
+     <span><a href="#safari" data-hash-tab>Safari browser</a></span>
    </div>
    <div class="tab-ct">
-     <div class="tab-item" data-hash="chrome">
-         <p>
-             <a href="#chrome-browser">Google Chrome</a> is a freeware web browser[11] developed by Google. It used the WebKit layout engine until version 27 and, with the exception of its iOS releases, from version 28 and beyond uses the WebKit fork Blink.[12][13][14] It was first released as a beta version for Microsoft Windows on September 2, 2008, and as a stable public release on December 11, 2008.</p>
+     
+     <div class="tab-item hide" data-hash="safari">
+        <p>
+            <a href="#safar-browser" class="active">Safari</a> is a web browser developed by Apple based on the WebKit engine. First released in 2003 with Mac OS X Panther, a mobile version has been included in iOS devices since the introduction of the iPhone in 2007. It is the default browser on Apple devices. A Windows version, now discontinued,[3] was available from 2007 to 2012.</p>  
      </div>
+       
 
-     <div class="tab-item" data-hash="firefox">
+     <div class="tab-item hide" data-hash="firefox">
         <p>
             <a href="#firefox-browser">Mozilla Firefox</a> (known simply as Firefox) is a free and open-source[17] web browser developed by the Mozilla Foundation and its subsidiary, the Mozilla Corporation. Firefox is available for Windows, OS X and Linux operating systems, with its mobile versions available for Android, and Firefox OS; where all of these versions use the Gecko layout engine to render web pages, which implements current and anticipated web standards,[18] but an additional version – Firefox for iOS is also available – that doesn't use Gecko. 
         </p>  
      </div>
-     <div class="tab-item" data-hash="safari">
-        <p>
-            <a href="#safar-browser" class="active">Safari</a> is a web browser developed by Apple based on the WebKit engine. First released in 2003 with Mac OS X Panther, a mobile version has been included in iOS devices since the introduction of the iPhone in 2007. It is the default browser on Apple devices. A Windows version, now discontinued,[3] was available from 2007 to 2012.</p>  
-     </div>
-     <div class="tab-item" data-hash="opera">
+     <div class="tab-item hide" data-hash="opera">
         <p>
             <a href="#safar-browser">Opera</a> is a web browser developed by Opera Software. The latest version is available for Microsoft Windows, OS X, and Linux operating systems, and uses the Blink layout engine. An earlier version using the Presto layout engine is still available, and additionally runs on FreeBSD systems. 
         </p>  
+     </div>
+       <div class="tab-item hide" data-hash="chrome">
+         <p>
+             <a href="#chrome-browser">Google Chrome</a> is a freeware web browser[11] developed by Google. It used the WebKit layout engine until version 27 and, with the exception of its iOS releases, from version 28 and beyond uses the WebKit fork Blink.[12][13][14] It was first released as a beta version for Microsoft Windows on September 2, 2008, and as a stable public release on December 11, 2008.
+         </p>
      </div>
    </div>
  </div>
  <script src="src/jquery-1.8.3.min.js"></script>
  <script src="src/hash-tabs.js"></script>
  <script>
-    hashTabs('.tab-module');
+   hashTabs('.tab-module', {idx:1});
  </script>
  
 </body>
