@@ -25,14 +25,18 @@
     var opts = this.options;
     var url = decodeURIComponent(location.href);
     var lastChar = url.substring(url.length - 1);
+      
     if (hashContent.length) {
       $(window).trigger('hashchange');
-    } else if (!location.hash && lastChar !== '#') {
+    } 
+      
+    else if (!location.hash && lastChar !== '#') {
       opts.idx = Math.max(0, Math.min(opts.idx, this.tab.length - 1));
       this.tab.eq(opts.idx).addClass('active');
       this.content.eq(opts.idx).removeClass('hide');
       location.hash = this.tab.eq(opts.idx).attr('href');
     }
+      
   };
     
   hashTabs.prototype.hashChangeHandle = function(e) {
