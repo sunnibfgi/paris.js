@@ -20,23 +20,18 @@
   };
     
   hashTabs.prototype.initialize = function() {
+    var opts = this.options;
     var hash = location.hash.substring(1);
     var hashContent = $('[data-hash=' + hash + ']', this.el);
-    var opts = this.options;
-    var url = decodeURIComponent(location.href);
-    var lastChar = url.substring(url.length - 1);
       
-    if (hashContent.length) {
-      $(window).trigger('hashchange');
-    } 
+    $(window).trigger('hashchange');
       
-    else if (!location.hash && lastChar !== '#') {
+    if (!hash || (hash && !hashContent.length)) {
       opts.idx = Math.max(0, Math.min(opts.idx, this.tab.length - 1));
+      hash = this.tab[opts.idx].hash.substring(1);
       this.tab.eq(opts.idx).addClass('active');
-      this.content.eq(opts.idx).removeClass('hide');
-      location.hash = this.tab.eq(opts.idx).attr('href');
+      $('[data-hash=' + hash + ']').removeClass('hide');
     }
-      
   };
     
   hashTabs.prototype.hashChangeHandle = function(e) {
@@ -47,9 +42,6 @@
       hashContent.removeClass('hide');
       this.tab.removeClass('active');
       $('[href=#' + hash + ']').addClass('active');
-    } else {
-      this.tab.removeClass('active');
-      this.content.addClass('hide');
     }
   };
     
