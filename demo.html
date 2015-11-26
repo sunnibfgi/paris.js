@@ -6,8 +6,7 @@
   <style>
       * { margin:0; padding:0} 
       body { font-size:100%; font-family:verdana, sans-seif}
-      .tab-module { width:50%; margin: auto}
-      .tab-hd span { }
+      .tab-module { width:50%; margin: 0 auto 2em}
       .tab-hd a { display:inline-block; line-height: 40px; text-align: center; padding: 0 15px;
           text-decoration: none}
       .active { border-bottom: 2px solid orange}
@@ -17,7 +16,42 @@
 </head>
 
 <body data-id="haha">
- <div class="tab-module">
+<iframe width="100%" src="http://alistapart.com/d/responsive-web-design/ex/ex-site-FINAL.html"></iframe>
+<div class="tab-module" data-id="country">
+   <div class="tab-hd">
+     <span><a href="#united_kingdom" data-hash-tab>United Kingdom</a></span>
+     <span><a href="#germany"  data-hash-tab>Germany</a></span>
+     <span><a href="#france" data-hash-tab>France</a></span>
+     <span><a href="#italy" data-hash-tab>Italy</a></span>
+   </div>
+   <div class="tab-ct">
+     
+     <div class="tab-item hide" data-hash="italy">
+        <p>Italy has the third largest economy in the Eurozone and the eighth largest economy in the world. It has a very high level of human development and enjoys the highest life expectancy in the EU.[20] Italy plays a prominent role in global military, cultural and diplomatic affairs and is also considered to be a major regional power in Europe.[21][22][23][24] Italy is a founding and leading member of the European Union and the member of numerous international institutions, including the UN, NATO, the OECD, the OSCE, the WTO, the G7/G8, G20, the Union for the Mediterranean, the Council of Europe, Uniting for Consensus, and many more. As a reflection of its vast cultural wealth, Italy is home to 51 World Heritage Sites, the most in the world, and is one of the most visited countries.
+           </p>  
+     </div>
+       
+
+     <div class="tab-item hide" data-hash="united_kingdom">
+        <p>
+            The United Kingdom is a developed country and has the world's fifth-largest economy by nominal GDP and tenth-largest economy by purchasing power parity. The UK is considered to have a high-income economy and is categorised as very high in the Human Development Index, currently ranking 14th in the world. It was the world's first industrialised country and the world's foremost power during the 19th and early 20th centuries.[18][19] The UK remains a great power with considerable economic, cultural, military, scientific, and political influence internationally.[20][21] It is a recognised nuclear weapons state and its military expenditure ranks fifth or sixth in the world.[22][23] The UK has been a permanent member of the United Nations Security Council since its first session in 1946. It has been a member state of the European Union (EU) and its predecessor, the European Economic Community (EEC), since 1973; it is also a member of the Commonwealth of Nations, the Council of Europe, the G7 finance ministers, the G7 forum, the G20, NATO, the Organisation for Economic Co-operation and Development (OECD), and the World Trade Organization (WTO).
+
+
+        </p>  
+     </div>
+     <div class="tab-item hide" data-hash="france">
+        <p>
+          French citizens enjoy a high standard of living, and the country performs well in international rankings of education, health care, life expectancy, civil liberties, and human development.[24][25] France is a founding member of the United Nations, where it serves as one of the five permanent members of the UN Security Council. It is a member of the Group of 7, North Atlantic Treaty Organization (NATO), Organisation for Economic Co-operation and Development (OECD), the World Trade Organization (WTO), and La Francophonie. France is a founding and leading member state of the European Union (EU).[26] 
+        </p>  
+     </div>
+       <div class="tab-item hide" data-hash="germany">
+         <p>
+             Germany was a founding member of the European Union in 1993. It is part of the Schengen Area, and became a co-founder of the Eurozone in 1999. Germany is a member of the United Nations, NATO, the G8, the G20, and the OECD. The national military expenditure is the 9th highest in the world. Known for its rich cultural history, Germany has been continuously the home of influential artists, philosophers, musicians, sportsmen, entrepreneurs, scientists and inventors.
+         </p>
+     </div>
+   </div>
+ </div>
+ <div class="tab-module" data-id="browser">
    <div class="tab-hd">
      <span><a href="#chrome" data-hash-tab>Chrome browser</a></span>
      <span><a href="#opera"  data-hash-tab>Opera browser</a></span>
@@ -52,7 +86,8 @@
  <script src="src/jquery-1.8.3.min.js"></script>
  <script src="src/hash-tabs.js"></script>
  <script>
-   hashTabs('.tab-module');
+   hashTabs('[data-id=country]', {idx:2});
+   hashTabs('[data-id=browser]', {idx:20});
  </script>
  
 </body>
