@@ -7,9 +7,7 @@
     if (!(this instanceof hashTabs)) {
       return new hashTabs(element, options);
     }
-    this.options = options || {
-      idx: 0
-    };
+    this.options = options;
     this.el = $(element);
     this.tab = $('[data-hash-tab]', this.el);
     this.content = $('[data-hash]', this.el);
@@ -53,15 +51,11 @@
         $this.content.addClass('hide');
         $('[data-hash=' + href + ']').removeClass('hide');
         $this.tab.removeClass('active');
-        $this.hashCache.hash = ('#' + id + '=' + href);
         el.addClass('active');
         correctHash = true;
         return false;
       }
     });
-    if ($this.hashCache.hash !== hash) {
-      $this.hashCompare();
-    }
     return correctHash;
   };
     
