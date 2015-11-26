@@ -7,9 +7,7 @@
     if (!(this instanceof hashTabs)) {
       return new hashTabs(element, options);
     }
-    this.options = options || {
-      idx: 0
-    };
+    this.options = options || {idx: 0};
     this.el = $(element);
     this.tab = $('[data-hash-tab]', this.el);
     this.content = $('[data-hash]', this.el);
@@ -33,7 +31,7 @@
       this.setHashTabs();
     }
   };
-  
+    
   hashTabs.prototype.setHashTabs = function() {
     var hash = location.hash;
     var id = this.el.data('id');
@@ -53,13 +51,17 @@
     });
     return correctHash;
   };
-  
+    
   hashTabs.prototype.clickHandler = function() {
     var id = this.el.data('id');
-    this.tab.on('click', function(e) {　　
-      var href = $(this).attr('href').substring(1);
-      location.hash = id + '=' + href;
+    this.tab.on('click', function(e) {
       e.preventDefault();
+      var href = $(this).attr('href').substring(1);
+      var str = id + '=' + href;
+      if (location.hash === str) {
+        return false;
+      }
+      location.hash = str;
     });
   };
     
