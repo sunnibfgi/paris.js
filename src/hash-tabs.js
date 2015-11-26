@@ -60,7 +60,7 @@
       }
     });
     if ($this.hashCache.hash !== hash) {
-      this.hashCompare();
+      $this.hashCompare();
     }
     return correctHash;
   };
