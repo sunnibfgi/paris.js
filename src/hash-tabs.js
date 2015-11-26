@@ -7,10 +7,13 @@
     if (!(this instanceof hashTabs)) {
       return new hashTabs(element, options);
     }
-    this.options = options || {idx: 0};
+    this.options = options || {
+      idx: 0
+    };
     this.el = $(element);
     this.tab = $('[data-hash-tab]', this.el);
     this.content = $('[data-hash]', this.el);
+    this.hashCache = {};
     this.listener();
   }
     
@@ -18,18 +21,24 @@
     $(window).on('hashchange', $.proxy(this.setHashTabs, this));
     this.initialize();
   };
-    
   hashTabs.prototype.initialize = function() {
     var opts = this.options;
-    this.clickHandler();
     if (!location.hash.length || !this.setHashTabs()) {
-      opts.idx = Math.max(0, Math.min(opts.idx, this.tab.length - 1));
-      var href = this.tab[opts.idx].hash.substring(1);
-      this.tab.eq(opts.idx).addClass('active');
-      $('[data-hash=' + href + ']').removeClass('hide');
+      this.hashCompare();
     } else {
       this.setHashTabs();
     }
+    this.clickHandler();
+  };
+    
+  hashTabs.prototype.hashCompare = function() {
+    var opts = this.options;
+    opts.idx = Math.max(0, Math.min(opts.idx, this.tab.length - 1));
+    var href = this.tab[opts.idx].hash.substring(1);
+    this.tab.removeClass('active');
+    this.tab.eq(opts.idx).addClass('active');
+    this.content.addClass('hide');
+    $('[data-hash=' + href + ']').removeClass('hide');
   };
     
   hashTabs.prototype.setHashTabs = function() {
@@ -44,11 +53,15 @@
         $this.content.addClass('hide');
         $('[data-hash=' + href + ']').removeClass('hide');
         $this.tab.removeClass('active');
+        $this.hashCache.hash = ('#' + id + '=' + href);
         el.addClass('active');
         correctHash = true;
         return false;
       }
     });
+    if ($this.hashCache.hash !== hash) {
+      this.hashCompare();
+    }
     return correctHash;
   };
     
