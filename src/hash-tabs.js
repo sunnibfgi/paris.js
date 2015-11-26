@@ -1,5 +1,6 @@
 // hash-tabs.js
 // require jquery.js or zepto.js　modern library
+
 (function(global, $) {
   'use strict';
 
@@ -7,7 +8,9 @@
     if (!(this instanceof hashTabs)) {
       return new hashTabs(element, options);
     }
-    this.options = options || {};
+    this.options = options || {
+      idx: 0
+    };
     this.el = $(element);
     this.tab = $('[data-hash-tab]', this.el);
     this.content = $('[data-hash]', this.el);
@@ -15,7 +18,10 @@
   }
     
   hashTabs.prototype.listener = function() {
-    $(window).on('hashchange', $.proxy(this.hashChangeHandle, this));
+    $(this.el).on('hashtabs', $.proxy(this.hashChangeHandle, this));
+    $(window).on('hashchange', $.proxy(function() {
+      $(this.el).trigger('hashtabs');
+    }, this));
     this.initialize();
   };
     
@@ -23,9 +29,7 @@
     var opts = this.options;
     var hash = location.hash.substring(1);
     var hashContent = $('[data-hash=' + hash + ']', this.el);
-      
-    $(window).trigger('hashchange');
-      
+    $(this.el).trigger('hashtabs');
     if (!hash || (hash && !hashContent.length)) {
       opts.idx = Math.max(0, Math.min(opts.idx, this.tab.length - 1));
       hash = this.tab[opts.idx].hash.substring(1);
