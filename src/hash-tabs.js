@@ -11,7 +11,6 @@
     this.el = $(element);
     this.tab = $('[data-hash-tab]', this.el);
     this.content = $('[data-hash]', this.el);
-    this.hashCache = {};
     this.listener();
   }
     
@@ -19,9 +18,13 @@
     $(window).on('hashchange', $.proxy(this.setHashTabs, this));
     this.initialize();
   };
+    
   hashTabs.prototype.initialize = function() {
     var opts = this.options;
-    if (!location.hash.length || !this.setHashTabs()) {
+    var href = encodeURIComponent(location.href);
+    if (href.substring(href.length - 1) === '#') {
+      $(document).scrollTop(0);
+    } else if (!location.hash.length || !this.setHashTabs()) {
       this.hashCompare();
     } else {
       this.setHashTabs();
