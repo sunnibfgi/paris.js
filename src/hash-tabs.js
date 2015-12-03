@@ -4,7 +4,7 @@
   'use strict';
 
   function hashTabs(element, options) {
-    if (!(this instanceof hashTabs)) {
+    if(!(this instanceof hashTabs)) {
       return new hashTabs(element, options);
     }
     this.options = options;
@@ -13,35 +13,37 @@
     this.content = $('[data-hash]', this.el);
     this.listener();
   }
-    
+
   hashTabs.prototype.listener = function() {
     $(window).on('hashchange', $.proxy(this.setHashTabs, this));
     this.initialize();
   };
-    
+
   hashTabs.prototype.initialize = function() {
     var opts = this.options;
     var href = encodeURIComponent(location.href);
-    if (href.substring(href.length - 1) === '#') {
+    if(href.substring(href.length - 1) === '#') {
       $(document).scrollTop(0);
-    } else if (!location.hash.length || !this.setHashTabs()) {
+    }
+    else if(!location.hash.length || !this.setHashTabs()) {
       this.hashCompare();
-    } else {
+    }
+    else {
       this.setHashTabs();
     }
     this.clickHandler();
   };
-    
+
   hashTabs.prototype.hashCompare = function() {
     var opts = this.options;
     opts.idx = Math.max(0, Math.min(opts.idx, this.tab.length - 1));
-    var href = this.tab[opts.idx].hash.substring(1);
+    var href = hashName(this.tab[opts.idx].hash);
     this.tab.removeClass('active');
     this.tab.eq(opts.idx).addClass('active');
     this.content.addClass('hide');
     $('[data-hash=' + href + ']').removeClass('hide');
   };
-    
+
   hashTabs.prototype.setHashTabs = function() {
     var hash = location.hash;
     var id = this.el.data('id');
@@ -49,8 +51,8 @@
     var correctHash = false;
     $.each(this.tab, function(i, el) {
       el = $(el);
-      var href = el.attr('href').substring(1);
-      if (('#' + id + '=' + href) === hash) {
+      var href = hashName(el.attr('href'));
+      if(('#' + id + '=' + href) === hash) {
         $this.content.addClass('hide');
         $('[data-hash=' + href + ']').removeClass('hide');
         $this.tab.removeClass('active');
@@ -59,22 +61,27 @@
         return false;
       }
     });
+
     return correctHash;
   };
-    
+
   hashTabs.prototype.clickHandler = function() {
     var id = this.el.data('id');
     this.tab.on('click', function(e) {
       e.preventDefault();
-      var href = $(this).attr('href').substring(1);
+      var href = hashName($(this).attr('href'));
       var str = id + '=' + href;
-      if (location.hash === str) {
+      if(location.hash === str) {
         return false;
       }
       location.hash = str;
     });
   };
-    
+
+  function hashName(attr) {
+    return attr && attr.substring(1);
+  }
+
   window.hashTabs = hashTabs;
-    
+
 })(window, (window.jQuery || window.Zepto));
